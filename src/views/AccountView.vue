@@ -1,5 +1,9 @@
 <template>
-    <div class="bg-emerald-500">Mon compte</div>
+    <div class="bg-blue-700">
+        fabien est pas bo
+    </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+</script>

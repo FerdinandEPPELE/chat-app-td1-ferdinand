@@ -1,16 +1,17 @@
 <script setup>
-import { defineProps } from 'vue';
 
-const props = defineProps({
-    modelValue: String
+defineProps({
+    modelValue: {
+        type: String,
+        default: ''
+    }
 })
-
-const emit = defineEmits(['update:modelValue'])
-
-
 
 </script>
 
 <template>
-    <input v-bind="$attrs" class="rounded-md">
+    <input :value="modelValue" 
+    @input="$emit('update:modelValue', $event.target.value)" 
+    v-bind="$attrs" 
+    class="p-2 rounded-md bg-slate-600" />
 </template>

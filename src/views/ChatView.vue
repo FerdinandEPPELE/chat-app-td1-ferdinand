@@ -1,37 +1,41 @@
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 import ChatMessage from '@/components/ChatMessage.vue';
-const messageContent = ref('');
-const messages = ref([]);
+import AppNavbar from '@/components/AppNavbar.vue';
+
+const mes = ref('');
+const mess = ref([]);
 
 const deleteMessage = (id) => {
-    messages.value = messages.value.filter((message) => message.id != id);
+    mess.value = mess.value.filter((mes) => mes.id != id);
 }
 
-const addMessage = () => {
-    messages.value.push({
-        id: messages.value.length,
-        content: messageContent.value,
-        date: new Date().toLocaleDateString(),
-        user: {
-            name: 'Neuille',
-            avatar: 'https://i.pravatar.cc/150?img=55'
-        }
-        })
-    messageContent.value = ''
+function addMessage() {
+    if (mes.value != '') {
+        mess.value.push({
+            id: mess.value.length,
+            content: mes.value,
+            date: new Date().toLocaleDateString(),
+            user: {
+                name: 'moi',
+                avatar: 'https://media.licdn.com/dms/image/C4D03AQH0TuKfHrOpfQ/profile-displayphoto-shrink_400_400/0/1607679351861?e=2147483647&v=beta&t=a2zxWJKCOT4EasStDlHtACsP2DwoH5fFWX6uudlQpe4'
+            }
+        });
+    }
+    mes.value = '';
 }
 </script>
 
 <template>
-    <div class="pl-4">
-        <div v-for="(message, index) in messages" :key="index" class="mb-3">
-            <ChatMessage :message="message" @delete="deleteMessage"></ChatMessage>
+    <AppNavbar></AppNavbar>
+    <div class="p-4">
+        <div v-for="(mes, i) in mess" :key="i">
+            <ChatMessage :mes="mes" @delete="deleteMessage"/>
         </div>
     </div>
 
     <div class="flex p-4">
-        <textarea v-model="messageContent" name="message" id="message" rows="1" class="text-black"></textarea>
-        <button @click="addMessage" class="rounded-md bg-black p-3 ml-3">Envoyer</button>
+        <textarea v-model="mes" name="message" id="message" rows="1" class="text-black"></textarea>
+        <button @click="addMessage" class="ml-3 bg-blue-500 rounded-md p-r">Envoyer</button>
     </div>
-    
 </template>
